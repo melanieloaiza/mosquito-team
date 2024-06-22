@@ -6,9 +6,6 @@ import plotly.express as px
 # Sample data loading
 data = pd.read_csv("mosquitoteam/J06_No_Irrad.csv") 
 
-
-st.set_option('deprecation.showPyplotGlobalUse', False)
-
 st.title(" 🦟 Mosca Project " )
 st.write(
     """
