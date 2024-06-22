@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Sample data loading
-data = pd.read_csv("J06_No_Irrad.csv")
+data = pd.read_csv("mosquitoteam/J06_No_Irrad.csv")
 
 st.sidebar.write("Mosquito team app")
 group = st.sidebar.radio("Select Group:", ("J06_No_Irrad", "J06_Irrad", "WildType_Yaviza"), index=0)
