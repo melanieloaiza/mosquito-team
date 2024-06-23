@@ -8,6 +8,7 @@ from scipy.stats import f_oneway
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from scipy.stats import f
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
 # Sample data loading
 data = pd.read_csv("mosquitoteam/J06_No_Irrad.csv") 
@@ -573,6 +574,45 @@ elif group == "ANOVA" :
                 "Therefore, we do not have sufficient evidence to conclude that there is a significant difference in WB_Arm1 between the groups.")
         st.write(
             "The overall model results are significant, suggesting that appropriate pairwise comparisons should be performed.")
+
+        # Performing pairwise Tukey's HSD test
+        tukey_results = pairwise_tukeyhsd(data3['WB_Arm1'], data3['group'])
+
+        # Displaying the results as a table
+        st.write("""### Tukey's HSD Test """)
+        st.write(pd.DataFrame(tukey_results.summary()))
+
+        st.write("""
+ 
+        In this output from the pairwise Tukey's HSD test, each row represents a pairwise comparison between two groups. Here's how to interpret the values:
+
+        - **group1** and **group2**: The two groups being compared.
+        - **meandiff**: The difference in means between the two groups.
+        - **p-adj**: The adjusted p-value, which is the probability of observing a result as extreme as the one obtained, assuming that the null hypothesis is true. It is adjusted for multiple comparisons.
+        - **lower** and **upper**: The lower and upper bounds of the confidence interval for the mean difference.
+        - **reject**: Indicates whether the null hypothesis of equal means is rejected. If True, it means that there is a significant difference between the means of the two groups. If False, it means that there is no significant difference.
+
+        ### Interpretation of Each Row
+
+        1. **Comparison between J06_Irrad and J06_No_Irrad**:
+           - Mean difference is 4.1458.
+           - Adjusted p-value is 0.0801, indicating no significant difference between the means (although it's close to the 0.05 threshold).
+           - The 95% confidence interval for the mean difference ranges from -0.376 to 8.6676.
+           - Conclusion: Fail to reject the null hypothesis (False), but there might be a trend towards significance.
+
+        2. **Comparison between J06_Irrad and WildType_Yaviza**:
+           - Mean difference is 9.8167.
+           - Adjusted p-value is very low (0.0), indicating a significant difference between the means.
+           - The 95% confidence interval for the mean difference ranges from 5.2949 to 14.3385.
+           - Conclusion: Reject the null hypothesis (True), suggesting a significant difference between the means.
+
+        3. **Comparison between J06_No_Irrad and WildType_Yaviza**:
+           - Mean difference is 5.6708.
+           - Adjusted p-value is 0.0093, indicating a significant difference between the means.
+           - The 95% confidence interval for the mean difference ranges from 1.149 to 10.1926.
+           - Conclusion: Reject the null hypothesis (True), indicating a significant difference between the means.
+        """)
+
     else:
         st.write("### One-Way ANOVA with a significance level of α = 0.05")
         groups = data3.groupby('group')
@@ -629,3 +669,40 @@ elif group == "ANOVA" :
             st.write(
                 "Therefore, we do not have sufficient evidence to conclude that there is a significant difference in WB_Arm2 between the groups.")
         st.write("The overall model results are significant, suggesting that appropriate pairwise comparisons should be performed.")
+        # Performing pairwise Tukey's HSD test
+        tukey_results = pairwise_tukeyhsd(data3['WB_Arm2'], data3['group'])
+
+        # Displaying the results as a table
+        st.write("""### Tukey's HSD Test """)
+        st.write(pd.DataFrame(tukey_results.summary()))
+
+        st.write("""
+        
+        In this output from the pairwise Tukey's HSD test, each row represents a pairwise comparison between two groups. Here's how to interpret the values:
+
+        - **group1** and **group2**: The two groups being compared.
+        - **meandiff**: The difference in means between the two groups.
+        - **p-adj**: The adjusted p-value, which is the probability of observing a result as extreme as the one obtained, assuming that the null hypothesis is true. It is adjusted for multiple comparisons.
+        - **lower** and **upper**: The lower and upper bounds of the confidence interval for the mean difference.
+        - **reject**: Indicates whether the null hypothesis of equal means is rejected. If True, it means that there is a significant difference between the means of the two groups. If False, it means that there is no significant difference.
+
+        ### Interpretation of Each Row
+
+        1. **Comparison between J06_Irrad and J06_No_Irrad**:
+           - Mean difference is 7.2083.
+           - Adjusted p-value is 0.1825, indicating no significant difference between the means.
+           - The 95% confidence interval for the mean difference ranges from -2.3879 to 16.8046.
+           - Conclusion: Fail to reject the null hypothesis (False).
+
+        2. **Comparison between J06_Irrad and WildType_Yaviza**:
+           - Mean difference is 16.7458.
+           - Adjusted p-value is very low (0.0001), indicating a significant difference between the means.
+           - The 95% confidence interval for the mean difference ranges from 7.1496 to 26.3421.
+           - Conclusion: Reject the null hypothesis (True), suggesting a significant difference between the means.
+
+        3. **Comparison between J06_No_Irrad and WildType_Yaviza**:
+           - Mean difference is 9.5375.
+           - Adjusted p-value is 0.0518, which is slightly above the significance level of 0.05, indicating a borderline significant difference.
+           - The 95% confidence interval for the mean difference ranges from -0.0587 to 19.1337.
+           - Conclusion: Borderline fail to reject the null hypothesis (False), suggesting a potential difference but not statistically significant at the 0.05 level.
+        """)
