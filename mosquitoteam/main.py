@@ -16,11 +16,6 @@ data2 = pd.read_csv("mosquitoteam/WildType_Yaviza.csv")
 data3 = pd.read_csv("mosquitoteam/groups.csv")
 
 st.title(" 🦟 Mosca Project " )
-st.write(
-    """
-    This app visualizes data from three groups: J06_No_Irrad, J06_Irrad, and WildType_Yaviza. It includes boxplots and histograms for the distributions of WB_Arm1 and WB_Arm2, accounting for sex, along with the corresponding statistical tables.
- """
-)
 
 group = st.sidebar.radio("Select Group:", ("J06_No_Irrad", "J06_Irrad", "WildType_Yaviza" , "Results" , "ANOVA"), index=0)
 
