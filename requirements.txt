@@ -1,3 +1,5 @@
 plotly
 statsmodels
 kaleido
+pandas 
+scipy
