@@ -13,24 +13,24 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 st.set_page_config(layout="wide")
 
 # J06_No_Irrad DATASET
-data = pd.read_csv("J06_No_Irrad.csv")
+data = pd.read_csv("mosquitoteam/J06_No_Irrad.csv")
 df = pd.DataFrame(data)
 male_data = df[df["J06_No_Irrad"] == "Male"]
 female_data = df[df["J06_No_Irrad"] == "Female"]
 
 # J06_Irrad DATASET
-data1 = pd.read_csv("J06_Irrad.csv")
+data1 = pd.read_csv("mosquitoteam/J06_Irrad.csv")
 df1 = pd.DataFrame(data1)
 male_data1 = df1[df1["J06_Irrad"] == "Male"]
 female_data1 = df1[df1["J06_Irrad"] == "Female"]
 
 # WildType_Yaviza DATASET
-data2 = pd.read_csv("WildType_Yaviza.csv")
+data2 = pd.read_csv("mosquitoteam/WildType_Yaviza.csv")
 df2 = pd.DataFrame(data2)
 male_data2 = df2[df2["WildType_Yaviza"] == "Male"]
 female_data2 = df2[df2["WildType_Yaviza"] == "Female"]
 
-data3 = pd.read_csv("groups.csv")
+data3 = pd.read_csv("mosquitoteam/groups.csv")
 df3 = pd.read_csv("groups.csv")
 
 st.title(" 🦟 Mosca Project " )
