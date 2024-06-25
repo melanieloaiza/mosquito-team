@@ -31,7 +31,7 @@ male_data2 = df2[df2["WildType_Yaviza"] == "Male"]
 female_data2 = df2[df2["WildType_Yaviza"] == "Female"]
 
 data3 = pd.read_csv("mosquitoteam/groups.csv")
-df3 = pd.read_csv("groups.csv")
+df3 = pd.read_csv("mosquitoteam/groups.csv")
 
 st.title(" 🦟 Mosca Project " )
 group = st.sidebar.radio("Select Group:", ("J06_No_Irrad", "J06_Irrad", "WildType_Yaviza" , "Conclusion" , "One Way (ANOVA)"), index=0)
